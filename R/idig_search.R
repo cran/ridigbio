@@ -58,13 +58,6 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   fields <- field_lists$fields
   query <- append(query, field_lists$query)
 
-#  if (!is.null(field_lists$rq_fields)) {
-#    query$fields <- field_lists$rq_fields
-#  }
-#  if (!is.null(field_lists$rq_fields_exclude)) {
-#    query$fields <- field_lists$rq_fields_exclude
-#  }
-
   if (limit > 0){
     query$limit <- limit
   }else{
@@ -72,7 +65,10 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   }
 
   # tricks to get inside loop first time
-  dat <- data.frame()
+  m <- matrix(nrow=0, ncol=length(fields))
+  #    res <- data.frame(res, stringsAsFactors = FALSE)
+  dat <- data.frame(m, stringsAsFactors=FALSE)
+  colnames(dat) <- fields
   item_count <- 1
 
   # loop until we either have all results or all results the user wants
@@ -87,16 +83,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
                   " results. See max_items argument."))
     }
 
-    if (nrow(dat) == 0){
-      dat <- fmt_search_txt_to_df(search_results, fields)
-    } else {
-      #dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, 
-      # fields))
-      dat <- rbind(dat, fmt_search_txt_to_df(search_results, fields))
-      #print(paste0(Sys.time(), " completed append"))
-    }
-    # Need to add a safety here to make sure the parsing adds rows to the df
-    # maybe a stop or return false from the parser if no rows found?
+    dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
 
     query$offset <- nrow(dat)
     if (limit > 0){
@@ -104,16 +91,12 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     }
   }
 
-  # Set column names, built df from matrix so they're missing
-  field_indexes <- idig_field_indexes(fields)
-  colnames(dat) <- names(field_indexes)
-
   # Metadata as attributes on the df
   a <- attributes(dat)
   a[["itemCount"]] <- item_count
   a[["attribution"]] <- fmt_search_txt_to_attribution(search_results)
   attributes(dat) <- a
-  #print(paste0(Sys.time(), " completed"))
+
   dat
 }
 
@@ -133,31 +116,32 @@ fmt_search_txt_to_df <- function(txt, fields) {
 
   #Before continuing to add error handling, let's settle on a pattern.
 
-  search_items <- httr::content(txt)$items
+  search_items <- jsonlite::fromJSON(httr::content(txt, as="text"))[["items"]]
+  res <- data.frame(search_items[["indexTerms"]], 
+                    search_items[["data"]], stringsAsFactors=FALSE)
 
-  # pre-allocated matrix method
-  # This method is on the order of 2-3 seconds/5k records which is about how
-  # long it takes the HTTP response to happen on a 100Mb/s link when asking for
-  # 10 fields optimizing this further will quickly make HTTP the rate limiter.
-  # The is.null() check allows for records that do not have the requested field
-  # filled in.
-
-  # Translate list of fields into a list of indexes, see doc on this method.
-  field_indexes <- idig_field_indexes(fields)
-
-  if (length(search_items) > 0) {
-      flat_search_it <- lapply(search_items, function(x) {
-          res <- x[["indexTerms"]][names(field_indexes)]
-          names(res) <- names(field_indexes)
-          res[sapply(res, is.null)] <- NA
-          as.character(res)
-      })
-      res <- do.call("rbind", flat_search_it)
-      res <- data.frame(res, stringsAsFactors = FALSE)
-  } else {
-      res <- matrix(nrow=length(search_items), ncol=length(field_indexes))
-      res <- data.frame(res, stringsAsFactors = FALSE)
+  # Append "data." to the data field names. Also, for some reason ":" gets 
+  # changed to "." in the data field names when making the df. Need the if
+  # statements because helpfully paste0("str", NULL) => "str".
+  n <- c()
+  if (length(names(search_items[["indexTerms"]])) > 0){
+    n <- c(n, names(search_items[["indexTerms"]]))
   }
+  if (length(names(search_items[["data"]])) > 0){
+    n <- c(n, paste0("data.", names(search_items[["data"]])))
+  }
+  colnames(res) <- n
+  
+  # Fixup geopoint into two fields for convenience
+  # Doing this inside here because the rbind.fill function seems to pack
+  # list fields into nested lists in the last record of the first df made. It's 
+  # weird. Would be nicer to do this outside the paging loop otherwise.
+  if ("geopoint" %in% colnames(res)){
+    res[["geopoint.lon"]] <- res[["geopoint"]][[1]]
+    res[["geopoint.lat"]] <- res[["geopoint"]][[2]]
+    res$geopoint <- NULL
+  }
+
   res
 }
 
@@ -188,6 +172,15 @@ build_field_lists <- function(fields, type) {
     ret$query$fields_exclude <- "data"
     # Load up all fields possible
     ret$fields <- names(idig_meta_fields(type=type, subset="indexed"))
+  }
+  
+  # Fixup geopoint into two fields. There is also a parallel fixup inside the
+  # fmt_search_txt_to_df() function. Preserve field order that the user 
+  # specified.
+  if ("geopoint" %in% ret[["fields"]]){
+    i <- match("geopoint", ret[["fields"]])
+    ret[["fields"]][[i]] <- "geopoint.lon"
+    ret[["fields"]] <- append(ret[["fields"]], "geopoint.lat", i)
   }
   ret
 }
