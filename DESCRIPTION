@@ -1,7 +1,7 @@
 Package: ridigbio
 Title: Interface to the iDigBio Data API
-Version: 0.3
-Date: 2015-07-13
+Version: 0.3.1
+Date: 2015-08-28
 Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cph"),
   email="francois.michonneau@gmail.com"),
   person("Matthew", "Collins", role=c("aut", "cre"),
@@ -22,9 +22,9 @@ LazyData: true
 Suggests: testthat
 Repository: CRAN
 NeedsCompilation: no
-Packaged: 2015-07-14 15:25:22 UTC; mcollins
+Packaged: 2015-08-31 14:36:26 UTC; mcollins
 Author: Francois Michonneau [aut, cph],
   Matthew Collins [aut, cre],
   Scott Chamberlain [ctb]
 Maintainer: Matthew Collins <mcollins@acis.ufl.edu>
-Date/Publication: 2015-07-15 01:17:20
+Date/Publication: 2015-08-31 19:26:25

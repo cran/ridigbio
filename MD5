@@ -1,4 +1,4 @@
-f7e01b1d944bd688236d6fefb0f7b8e6 *DESCRIPTION
+3bcb75f470305d865dcdf9fea8e5366e *DESCRIPTION
 eb163954d073ac5772bd96a4b305b025 *LICENSE
 ad40d1a071c6479877c82127fb8c8862 *NAMESPACE
 8cd8ae935b76aded96e3f8d8df57a9c0 *R/base.R
@@ -37,10 +37,10 @@ bf8558aefb1096c1af68967e06b5587a *man/idig_view_records.Rd
 db0db65abdc16d54ac85adbb6672d088 *man/ridigbio.Rd
 4a4e0924bef284dfaca32d3f6dc704c0 *tests/testthat.R
 d4a33b4b71759d3591874f7bd553fff1 *tests/testthat/test-base.R
-45710599c22727f92120cb236701275d *tests/testthat/test-idig_count_media.R
+95ab2c6bf13d8fa5c5f6bdf0bcda05e6 *tests/testthat/test-idig_count_media.R
 fdd461d2e316391a8e994177c7954f57 *tests/testthat/test-idig_count_records.R
 c148b78c627f47241f4c342c949c38f0 *tests/testthat/test-idig_meta_fields.R
-8614f781e4aaa4c72c428f6c9796b676 *tests/testthat/test-idig_search_media.R
+5b1df6007746bed7ba20cbcf94eb3886 *tests/testthat/test-idig_search_media.R
 3b8c7cdcc3c8f0d1f9acd3eb347b4bc7 *tests/testthat/test-idig_search_records.R
 a6997868fdb6eaa9e0e01ff59a73f2bd *tests/testthat/test-idig_top_media.R
 88c947c2a9e9bdf5c5c389299cf6a62b *tests/testthat/test-idig_top_records.R
