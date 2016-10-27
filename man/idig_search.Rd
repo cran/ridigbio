@@ -16,8 +16,8 @@ idig_search(type = "records", mq = FALSE, rq = FALSE, fields = FALSE,
 
 \item{fields}{vector of fields that will be contained in the data.frame}
 
-\item{max_items}{maximum number of results allowed to be retrieved (fail
--safe)}
+\item{max_items}{CURRENTLY IGNORED, SEE ISSUE #33 maximum number of results 
+allowed to be retrieved (fail-safe)}
 
 \item{limit}{maximum number of results returned}
 
