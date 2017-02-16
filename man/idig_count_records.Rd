@@ -24,4 +24,3 @@ provided.
 \author{
 Matthew Collins
 }
-

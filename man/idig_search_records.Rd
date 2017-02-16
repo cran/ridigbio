@@ -139,4 +139,3 @@ write.csv(df[c("uuid", "geopoint.lon", "geopoint.lat")],
 \author{
 Matthew Collins
 }
-

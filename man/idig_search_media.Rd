@@ -57,4 +57,3 @@ df <- idig_search_media(rq=list(genus="acer"),
 \author{
 Matthew Collins
 }
-

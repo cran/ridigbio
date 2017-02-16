@@ -23,4 +23,3 @@ everything is valid. Not exported.
 \author{
 Matthew Collins
 }
-

@@ -22,4 +22,3 @@ messages and stops if any are found. Not exported.
 \author{
 Francois Michonneau
 }
-

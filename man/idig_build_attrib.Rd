@@ -28,4 +28,3 @@ Exported.
 \author{
 Kevin Love
 }
-

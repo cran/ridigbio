@@ -55,4 +55,3 @@ idig_search(type="media", rq=list(genus="acer"), limit=10)
 \author{
 Francois Michonneau
 }
-
