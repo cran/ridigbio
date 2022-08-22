@@ -2,7 +2,7 @@
 ##'
 ##' Wraps \code{\link{idig_search}} to provide defaults specific to searching 
 ##' specimen records. Using this function instead of \code{\link{idig_search}} 
-##' directly is recommened. 
+##' directly is recommended. 
 ##' 
 ##' Queries need to be specified as a nested list structure that will serialize
 ##' to an iDigBio query object's JSON as expected by the iDigBio API: 
@@ -57,7 +57,7 @@
 ##' 
 ##' See the Examples section below for more samples of simpler and more complex
 ##' queries. Please refer to the API documentation for the full functionality
-##' availible in queries.
+##' available in queries.
 ##' 
 ##' All matching results are returned up to the max_items cap (default 100,000).
 ##' If more results are wanted, a higher max_items can be passed as an option.
@@ -69,12 +69,12 @@
 ##' 
 ##' The iDigBio API will only return 5,000 records at a time but this function 
 ##' will automatically page through the results and return them all. Limit 
-##' and offset are availible if manual paging of results is needed though the 
+##' and offset are available if manual paging of results is needed though the 
 ##' max_items cap still applies. The item count comes from the results header 
 ##' not the count of actual records in the limit/offset window.
 ##'
 ##' Return is a data.frame containing the requested fields (or the default
-##' fields). The columns in the data frame are untyped and no factors are pre-
+##' fields). The columns in the data frame are un-typed and no factors are pre-
 ##' built. Attribution and other metadata is attached to the dataframe in the
 ##' data.frame's attributes. (I.e. \code{attributes(df)})
 ##' @title Searching of iDigBio records
@@ -92,7 +92,7 @@
 ##' @author Matthew Collins
 ##' @examples
 ##' \dontrun{
-##' # Simple example of retriving records in a genus:
+##' # Simple example of retrieving records in a genus:
 ##' idig_search_records(rq=list(genus="acer"), limit=10)
 ##' 
 ##' # This complex query shows that booleans passed to the API are represented
@@ -143,7 +143,8 @@ idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0,
     fields <- DEFAULT_FIELDS
   }
 
-  if (!(fields == "all" ) && !(inherits(fields, "character"))) {
+  fields_eq_all = length(fields) == 1 && fields == "all"
+  if (!fields_eq_all && !(inherits(fields, "character"))) {
     stop("Invalid value for fields")
   }
 

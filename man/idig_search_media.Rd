@@ -4,8 +4,16 @@
 \alias{idig_search_media}
 \title{Searching of iDigBio media records}
 \usage{
-idig_search_media(mq = FALSE, rq = FALSE, fields = FALSE,
-  max_items = 1e+05, limit = 0, offset = 0, sort = FALSE, ...)
+idig_search_media(
+  mq = FALSE,
+  rq = FALSE,
+  fields = FALSE,
+  max_items = 1e+05,
+  limit = 0,
+  offset = 0,
+  sort = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mq}{iDigBio media query in nested list format}
@@ -39,7 +47,7 @@ parameters related to searching iDigBio.
 
 Wraps \code{\link{idig_search}} to provide defaults specific to searching 
 media records. Using this function instead of \code{\link{idig_search}} 
-directly is recommened. Record queries and media queries objects are allowed
+directly is recommended. Record queries and media queries objects are allowed
 (rq and mq parameters) and media records returned will match the 
 requirements of both.
 

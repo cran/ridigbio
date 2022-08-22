@@ -168,7 +168,7 @@ fmt_search_txt_to_df <- function(txt, fields) {
 ##' Given the desired fields to be returned, intelligently add an exclusion for
 ##' the data array if warranted and handle the "all" keyword. And do so without
 ##' setting both fields and fields_exclude due to fact that the API will return
-##' wrong results if are passed. This is still posssible if the user
+##' wrong results if are passed. This is still possible if the user
 ##' deliberately sets both. Not exported.
 ##' @param fields character vector of fields user wants returned
 ##' @param type type of records to get fields for
@@ -178,7 +178,8 @@ build_field_lists <- function(fields, type) {
   ret <- list()
   ret$query = list()
   # Here Alex says to eat "all" rather than pass it through to the API
-  if (inherits(fields, "character") && fields != "all" && length(fields) > 0 ){
+  fields_eq_all = length(fields) == 1 && fields == "all"
+  if (inherits(fields, "character") && !fields_eq_all && length(fields) > 0 ){
     ret$fields <- fields
     ret$query$fields <- fields
   } else {

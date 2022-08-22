@@ -4,8 +4,7 @@
 \alias{idig_top_media}
 \title{Top media endpoint}
 \usage{
-idig_top_media(rq = FALSE, mq = FALSE, top_fields = FALSE, count = 0,
-  ...)
+idig_top_media(rq = FALSE, mq = FALSE, top_fields = FALSE, count = 0, ...)
 }
 \arguments{
 \item{rq}{iDigBio record query in nested list format}

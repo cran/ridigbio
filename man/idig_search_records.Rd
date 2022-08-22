@@ -4,8 +4,15 @@
 \alias{idig_search_records}
 \title{Searching of iDigBio records}
 \usage{
-idig_search_records(rq, fields = FALSE, max_items = 1e+05, limit = 0,
-  offset = 0, sort = FALSE, ...)
+idig_search_records(
+  rq,
+  fields = FALSE,
+  max_items = 1e+05,
+  limit = 0,
+  offset = 0,
+  sort = FALSE,
+  ...
+)
 }
 \arguments{
 \item{rq}{iDigBio record query in nested list format}
@@ -34,7 +41,7 @@ Function to query the iDigBio API for specimen records
 \details{
 Wraps \code{\link{idig_search}} to provide defaults specific to searching 
 specimen records. Using this function instead of \code{\link{idig_search}} 
-directly is recommened.
+directly is recommened. 
 
 Queries need to be specified as a nested list structure that will serialize
 to an iDigBio query object's JSON as expected by the iDigBio API: 
@@ -97,11 +104,11 @@ This API loads records 5,000 at a time using HTTP so performance with large
 sets of data is not very good. Expect result sets over 50,000 records to
 take tens of minutes. You can use the \code{\link{idig_count_records}} or
 \code{\link{idig_count_media}} functions to find out how many records a
-query will return; these are fast.
+query will return; these are fast. 
 
 The iDigBio API will only return 5,000 records at a time but this function 
 will automatically page through the results and return them all. Limit 
-and offset are availible if manual paging of results is needed though the 
+and offset are available if manual paging of results is needed though the 
 max_items cap still applies. The item count comes from the results header 
 not the count of actual records in the limit/offset window.
 

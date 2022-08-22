@@ -4,8 +4,17 @@
 \alias{idig_search}
 \title{Basic searching of iDigBio records}
 \usage{
-idig_search(type = "records", mq = FALSE, rq = FALSE, fields = FALSE,
-  max_items = 1e+05, limit = 0, offset = 0, sort = FALSE, ...)
+idig_search(
+  type = "records",
+  mq = FALSE,
+  rq = FALSE,
+  fields = FALSE,
+  max_items = 1e+05,
+  limit = 0,
+  offset = 0,
+  sort = FALSE,
+  ...
+)
 }
 \arguments{
 \item{type}{string type of records to query, defaults to "records"}

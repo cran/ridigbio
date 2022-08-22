@@ -5,7 +5,7 @@
 ##' 
 ##' Wraps \code{\link{idig_search}} to provide defaults specific to searching 
 ##' media records. Using this function instead of \code{\link{idig_search}} 
-##' directly is recommened. Record queries and media queries objects are allowed
+##' directly is recommended. Record queries and media queries objects are allowed
 ##' (rq and mq parameters) and media records returned will match the 
 ##' requirements of both.
 ##' 
@@ -51,7 +51,9 @@ idig_search_media <- function(mq=FALSE, rq=FALSE, fields=FALSE,
     fields <- DEFAULT_FIELDS
   }
 
-  if (!(fields == "all" ) && !(inherits(fields, "character"))) {
+  fields_eq_all = (length(fields) == 1 && fields == "all")
+  fields_are_char = inherits(fields, "character")
+  if (!fields_eq_all && !fields_are_char) {
     stop("Invalid value for fields")
   }
 

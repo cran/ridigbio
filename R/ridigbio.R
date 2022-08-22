@@ -9,14 +9,14 @@
 ##' same API so you should be able to retrieve the same information as shown in
 ##' the portal.
 ##' 
-##' iDigBio contains nearly 30 million data records on musuem specimens held at
+##' iDigBio contains nearly 30 million data records on museum specimens held at
 ##' United States institutions. It also holds nearly 5 million images of these
 ##' specimens.
 ##'
 ##' @section Getting Started:
 ##' 
 ##' The main function is \code{\link{idig_search_records}} and reviewing its
-##' documenation first with \code{?idig_search_records} is recommended.
+##' documentation first with \code{?idig_search_records} is recommended.
 ##'
 ##' @section Limitations:
 ##' 

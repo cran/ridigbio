@@ -3,7 +3,6 @@
 \docType{package}
 \name{ridigbio}
 \alias{ridigbio}
-\alias{ridigbio-package}
 \title{Retrieve data from the iDigBio specimen data repository.}
 \description{
 Retrieve data from the iDigBio specimen data repository.
@@ -27,7 +26,7 @@ specimens.
 
 
 The main function is \code{\link{idig_search_records}} and reviewing its
-documenation first with \code{?idig_search_records} is recommended.
+documentation first with \code{?idig_search_records} is recommended.
 }
 
 \section{Limitations}{
