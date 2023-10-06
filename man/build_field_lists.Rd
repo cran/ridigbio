@@ -19,6 +19,6 @@ to be merged with the query sent
 Given the desired fields to be returned, intelligently add an exclusion for
 the data array if warranted and handle the "all" keyword. And do so without
 setting both fields and fields_exclude due to fact that the API will return
-wrong results if are passed. This is still possible if the user
+wrong results if are passed. This is still posssible if the user
 deliberately sets both. Not exported.
 }
