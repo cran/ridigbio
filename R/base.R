@@ -7,9 +7,9 @@
 ##' @author Francois Michonneau
 idig_url <- function(dev = FALSE) {
   if (dev) {
-    "http://beta-search.idigbio.org"
+    "https://beta-search.idigbio.org"
   } else {
-    "http://search.idigbio.org"
+    "https://search.idigbio.org"
   }
 }
 
@@ -116,7 +116,8 @@ idig_POST <- function(path, body, ...) {
 
 ##' Stub function for validating parameters.
 ##'
-##' Takes list of inputs named by validation rule eg "number":[2, 3] and returns
+##' Takes list of inputs named by validation rule eg:
+##' `number:[2, 3]` and returns
 ##' a vector of strings with any validation errors. If the vector is 0 length,
 ##' everything is valid. Not exported.
 ##' @title validate fields
@@ -125,4 +126,13 @@ idig_POST <- function(path, body, ...) {
 ##' @author Matthew Collins
 ##'
 idig_validate <- function(inputs) {
+}
+
+##' Stub function for passing import checks
+#| eval: false
+ignore_unused_imports <- function() {
+  leaflet::`%>%`()
+  kableExtra::kable()
+  tidyverse::tidyverse_logo()
+  cowplot::theme_minimal_grid()
 }
