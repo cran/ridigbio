@@ -383,7 +383,7 @@ API, you can run the following:</p>
 <span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>}</span>
 <span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="fu">colnames</span>(rfall) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;fieldName&quot;</span>)</span>
 <span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="fu">nrow</span>(rfall)</span></code></pre></div>
-<pre><code>## [1] 321</code></pre>
+<pre><code>## [1] 323</code></pre>
 <p>In addition to the fields provided by data providers, the Search API
 contains fields that have been indexed and potentially modified by
 iDigBio. To identify the indexed fields available with the Search API,
@@ -418,8 +418,8 @@ you can run the following:</p>
 <p>However, they contain similar information. For example,
 scientificName can be found in both the raw and index fields.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>rfall[<span class="dv">238</span>,]</span></code></pre></div>
-<pre><code>##                   name   type               fieldName
-## 238 dwc:samplingEffort string data.dwc:samplingEffort</code></pre>
+<pre><code>##                    name   type                fieldName
+## 238 dwc:sampleSizeValue string data.dwc:sampleSizeValue</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>rfalli[<span class="dv">69</span>,]</span></code></pre></div>
 <pre><code>##              name   type      fieldName
 ## 69 scientificname string scientificname</code></pre>

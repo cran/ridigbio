@@ -610,8 +610,10 @@ identified as being in one of the following genera: <em>Manis</em>,
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>                                  <span class="st">&quot;data.dwc:collectionCode&quot;</span>,</span>
 <span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>                                  <span class="st">&quot;catalognumber&quot;</span>,</span>
 <span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>                                  <span class="st">&quot;data.dwc:preparations&quot;</span>))</span></code></pre></div>
-<p>The query above returned 26913 records from the iDigBio Portal. Here
-is a preview of what our results look like:</p>
+<p>The query above returned
+<code>{r eval=verify_records} as.character(nrow(records))</code> records
+from the iDigBio Portal. Here is a preview of what our results look
+like:</p>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -853,7 +855,9 @@ specimens that may have cryo-preserved tissue available. We are looking
 in the <a href="https://dwc.tdwg.org/terms/#dwc:preparations">dwc:preparations</a>
 field for this information, but there isn’t a controlled vocabulary in
 use and so the data is not very standard. We can start by summarizing
-the distinct values present in this field for all 26913 records:</p>
+the distinct values present in this field for all
+<code>{r eval=verify_records} as.character(nrow(records))</code>
+records:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># List distinct values for the `preparation` field</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>prepsummary <span class="ot">&lt;-</span> records <span class="sc">%&gt;%</span> </span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">data.dwc:preparations</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
@@ -1815,8 +1819,9 @@ do this in the code below.</p>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>recordsfiltered <span class="ot">&lt;-</span> records <span class="sc">%&gt;%</span> </span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">data.dwc:preparations</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_to_lower</span>(<span class="st">`</span><span class="at">data.dwc:preparations</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&#39;freeze|froze|tissue&#39;</span>, <span class="st">`</span><span class="at">data.dwc:preparations</span><span class="st">`</span>))</span></code></pre></div>
-<p>Now we have 465 records, all of which are displayed in the table
-here:</p>
+<p>Now we have
+<code>{r eval=verify_records} as.character(nrow(recordsfiltered))</code>
+records, all of which are displayed in the table here:</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <thead>

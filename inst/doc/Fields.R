@@ -1,7 +1,23 @@
 ## ----message=FALSE, warning=FALSE, include=FALSE------------------------------
 library(ridigbio)
 
-## -----------------------------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
+
+verify_record_fields <- FALSE
+
+#Test that examples will run
+tryCatch({
+    # Your code that might throw an error
+    verify_record_fields <- idig_meta_fields(type = "records", subset = "raw", limit = 10)
+}, error = function(e) {
+    # Code to run if an error occurs
+    cat("An error occurred during the idig_search_records call: ", e$message, "\n")
+    cat("Vignettes will not be fully generated. Please try again after resolving the issue.")
+    # Optionally, you can return NULL or an empty dataframe
+    verify_record_fields <- FALSE
+})
+
+## ----eval=verify_record_fields------------------------------------------------
 record_fields <- idig_meta_fields(type = "records", subset = "raw")
 rfall <- data.frame(matrix(ncol = 3, nrow = 0))
 
@@ -26,7 +42,7 @@ for(i in 1:length(record_fields)){
 colnames(rfall) <- c("name", "type", "fieldName")
 nrow(rfall)
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 record_fields_index <- idig_meta_fields(type = "records", subset = "indexed")
 rfalli <- data.frame(matrix(ncol = 3, nrow = 0))
 
@@ -51,20 +67,20 @@ rfalli <- data.frame(matrix(ncol = 3, nrow = 0))
 colnames(rfalli) <- c("name", "type", "fieldName")
 nrow(rfalli)
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 setequal(rfall, rfalli)
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 rfall[238,]
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 rfalli[69,]
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 out <- idig_search_records(rq=list(scientificname="Galax urceolata"), 
                            fields = rfall$fieldName)
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 media_fields <- idig_meta_fields(type = "media", subset = "raw")
 mfall <- data.frame(matrix(ncol = 3, nrow = 0))
 
@@ -89,7 +105,7 @@ for(i in 1:length(media_fields)){
 colnames(mfall) <- c("name", "type", "fieldName")
 nrow(mfall)
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 media_fields_index <- idig_meta_fields(type = "media", subset = "indexed")
 mfalli <- data.frame(matrix(ncol = 3, nrow = 0))
 
@@ -114,10 +130,10 @@ for(i in 1:length(media_fields_index)){
 colnames(mfalli) <- c("name", "type", "fieldName")
 nrow(mfalli)
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 mfalli$name
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_record_fields------------------------------------------------
 out <- idig_search_media(rq=list(scientificname="Galax urceolata"), 
                            fields = mfalli$fieldName)
 

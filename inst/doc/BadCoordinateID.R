@@ -11,7 +11,26 @@ library(leaflet)
 
 library(cowplot)
 
-## -----------------------------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
+
+verify_df_flagCoord <- FALSE
+
+#Test that examples will run
+tryCatch({
+    # Your code that might throw an error
+    verify_df_flagCoord <- idig_search_records(
+        rq = list(flags = "rev_geocode_corrected", institutioncode = "lacm"),
+        limit = 10
+    )
+}, error = function(e) {
+    # Code to run if an error occurs
+    cat("An error occurred during the idig_search_records call: ", e$message, "\n")
+    cat("Vignettes will not be fully generated. Please try again after resolving the issue.")
+    # Optionally, you can return NULL or an empty dataframe
+    verify_df_flagCoord <- FALSE
+})
+
+## ----eval=verify_df_flagCoord-------------------------------------------------
 # Edit the fields (e.g. `flags`) and values (e.g. "rev_geocode_corrected") in
 # `list()` to adjust your query and the fields (e.g. `uuid`) in `fields` to
 # adjust the columns returned in your results
@@ -47,7 +66,7 @@ df_flagCoord <- idig_search_records(rq = list(flags = "rev_geocode_corrected",
          aggregator_stateprovince, aggregator_county, aggregator_locality,
          flags)
 
-## ----echo = FALSE-------------------------------------------------------------
+## ----eval=verify_df_flagCoord, echo = FALSE-----------------------------------
 # Subset `df_flagCoord` to show example
 df_flagCoord[1:50,] %>% 
   select(-flags) %>% 
@@ -57,7 +76,7 @@ df_flagCoord[1:50,] %>%
                 fixed_thead = T) %>% 
   scroll_box(width = "100%", height = "400px")
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_df_flagCoord-------------------------------------------------
 # Create function to allow subsetting the `df_flagCoord` dataset by other flags
 # found on these same records
 df_flagSubset <- function(subsetFlag) {
@@ -98,10 +117,10 @@ map <- df_rev_geocode_lat_sign[1:10,] %>%
     title = "Specimen Records",
     opacity = 1)
 
-## ----echo = FALSE, out.width = '100%'-----------------------------------------
+## ----eval=verify_df_flagCoord, echo = FALSE, out.width = '100%'---------------
 map
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_df_flagCoord-------------------------------------------------
 # Summarize flagged records by collection type
 spmByColl <- df_flagCoord %>% 
   group_by(collectioncode) %>% 
@@ -133,7 +152,7 @@ totalInstSpm <- idig_count_records(rq = list(institutioncode = "lacm"))
 # Calculate flagged records as percent of total records
 percentFlagged <- sum(spmByColl$n)/totalInstSpm*100
 
-## ----out.width="700px", echo = FALSE------------------------------------------
+## ----eval=verify_df_flagCoord, out.width="700px", echo = FALSE----------------
 graph_spmByColl <- graph_spmByColl +
                    theme_minimal_grid() +
                    theme(
@@ -144,7 +163,7 @@ graph_spmByColl <- graph_spmByColl +
 
 knitr::include_graphics(save_plot("plot.png", graph_spmByColl, base_height = 10, base_width = 24))
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_df_flagCoord-------------------------------------------------
 # Collate `df_flagAssoc` to describe other data quality flags that are associated
 # with rev_geocode_corrected in `df_flagCoord`
 df_flagAssoc <- df_flagCoord %>% 
@@ -175,7 +194,7 @@ graph_spmByColl <- ggplot(df_flagAssoc, aes(x = reorder(flags, -percent), y = pe
        title = "LACM records flagged for geo-coordinate issues are also flagged for...",
        fill = "flag category")
 
-## ----out.width="700px", echo = FALSE------------------------------------------
+## ----eval=verify_df_flagCoord, out.width="700px", echo = FALSE----------------
 graph_spmByColl <- graph_spmByColl +
                    theme_minimal_grid() +
                    theme(

@@ -6,7 +6,25 @@ library(tidyverse)
 # Load library for making nice HTML output
 library(kableExtra)
 
-## -----------------------------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
+
+verify_records <- FALSE
+
+#Test that examples will run
+tryCatch({
+    # Your code that might throw an error
+    verify_records <- idig_search_records(rq = list(flags = "rev_geocode_flip",
+                                              institutioncode = "fmnh"),
+        limit = 10)
+}, error = function(e) {
+    # Code to run if an error occurs
+    cat("An error occurred during the idig_search_records call: ", e$message, "\n")
+    cat("Vignettes will not be fully generated. Please try again after resolving the issue.")
+    # Optionally, you can return NULL or an empty dataframe
+    verify_records <- FALSE
+})
+
+## ----eval=verify_records------------------------------------------------------
 # Edit the fields (e.g. `flags` or `institutioncode`) and values (e.g. 
 # "rev_geocode_flip" or "fmnh") in `list()` to adjust your query and the fields
 # (e.g. `uuid`) in `fields` to adjust the columns returned in your results
@@ -40,7 +58,7 @@ records <- idig_search_records(rq = list(flags = "rev_geocode_flip",
          provider_lon, aggregator_lon, provider_country, aggregator_country,
          aggregator_stateprovince, aggregator_county, aggregator_locality)
 
-## ----echo = FALSE-------------------------------------------------------------
+## ----eval=verify_records, echo = FALSE----------------------------------------
 # Subset `records` to show example
 records[1:50,] %>% 
   kable() %>% 
@@ -49,7 +67,7 @@ records[1:50,] %>%
                 fixed_thead = T) %>% 
   scroll_box(width = "100%", height = "400px")
 
-## ----eval=FALSE, include=TRUE-------------------------------------------------
+## ----eval=verify_records, eval=FALSE, include=TRUE----------------------------
 #  # Save `records` as a CSV for reintegration into a local collection management
 #  # system
 #  write_csv(records, "records.csv")

@@ -362,7 +362,7 @@ to R with Biodiversity Data, <a href="https://www.doi.org/10.25334/84FC-TE88">do
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ridigbio&quot;</span>)</span></code></pre></div>
 <p>Before downloading any records, you must load the ridigbio
 package.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(ridigbio) </span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(ridigbio)</span></code></pre></div>
 </div>
 <div id="download-records" class="section level2">
 <h2>Download Records</h2>
@@ -606,14 +606,18 @@ downloads with Media downloads</td>
 </table>
 <div id="more-ways-to-search-1" class="section level3">
 <h3>More ways to search</h3>
-<p>The media search above retained 342 rows, however some of these
-observations do not have information in the <code>accessuri</code>
-field. To only obtain records with <code>acessuri</code>, we indicate we
-only want records where <code>data.ac:accessURI</code> exist, by setting
-<code>mq</code>, or media query, as followed:</p>
+<p>The media search above retained
+<code>{r eval=verify_galax_records} nrow(galax_media)</code> rows,
+however some of these observations do not have information in the
+<code>accessuri</code> field. To only obtain records with
+<code>acessuri</code>, we indicate we only want records where
+<code>data.ac:accessURI</code> exist, by setting <code>mq</code>, or
+media query, as followed:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>galax_media2 <span class="ot">&lt;-</span> <span class="fu">idig_search_media</span>(<span class="at">rq=</span><span class="fu">list</span>(<span class="at">scientificname=</span><span class="st">&quot;Galax urceolata&quot;</span>),</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>                                  <span class="at">mq=</span><span class="fu">list</span>(<span class="st">&quot;data.ac:accessURI&quot;</span><span class="ot">=</span><span class="fu">list</span>(<span class="st">&quot;type&quot;</span><span class="ot">=</span><span class="st">&quot;exists&quot;</span>)))</span></code></pre></div>
-<p>Now we have 328 observations with <code>accessuri</code>!</p>
+<p>Now we have
+<code>{r eval=verify_galax_records} nrow(galax_media2)</code>
+observations with <code>accessuri</code>!</p>
 </div>
 </div>
 

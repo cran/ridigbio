@@ -6,7 +6,26 @@ library(tidyverse)
 # Load library for making nice HTML output
 library(kableExtra)
 
-## -----------------------------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
+
+verify_records <- FALSE
+
+#Test that examples will run
+tryCatch({
+    # Your code that might throw an error
+    verify_records <- idig_search_records(rq = list(genus = c("manis",
+                                                   "rhinolophus",
+                                                   "paguma")),
+        limit = 10)
+}, error = function(e) {
+    # Code to run if an error occurs
+    cat("An error occurred during the idig_search_records call: ", e$message, "\n")
+    cat("Vignettes will not be fully generated. Please try again after resolving the issue.")
+    # Optionally, you can return NULL or an empty dataframe
+    verify_records <- FALSE
+})
+
+## ----eval=verify_records------------------------------------------------------
 # Edit the fields (e.g. `genus`) and values (e.g. "manis") in `list()` 
 # to adjust your query and the fields (e.g. `uuid`) in `fields` to adjust the
 # columns returned in your results
@@ -24,13 +43,13 @@ records <- idig_search_records(rq = list(genus = c("manis",
                                   "catalognumber",
                                   "data.dwc:preparations"))
 
-## ----echo = FALSE, results = 'asis'-------------------------------------------
+## ----eval=verify_records, echo = FALSE, results = 'asis'----------------------
 knitr::kable(head(records)) %>% 
     kable_styling(bootstrap_options = 
                          c("striped", "hover", "condensed", "responsive")) %>% 
   scroll_box(width = "100%")
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_records------------------------------------------------------
 # List distinct values for the `preparation` field
 prepsummary <- records %>% 
   group_by(`data.dwc:preparations`) %>% 
@@ -43,14 +62,14 @@ knitr::kable(prepsummary) %>%
                   full_width = FALSE) %>% 
   scroll_box(height = "400px")
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_records------------------------------------------------------
 # Normalize values in `data.dwc:preparations` to be all lowercase; then
 # filter rows that include our search terms
 recordsfiltered <- records %>% 
   mutate(`data.dwc:preparations` = str_to_lower(`data.dwc:preparations`)) %>% 
   filter(grepl('freeze|froze|tissue', `data.dwc:preparations`))
 
-## ----echo = FALSE, results = 'asis'-------------------------------------------
+## ----eval=verify_records, echo = FALSE, results = 'asis'----------------------
 knitr::kable(recordsfiltered) %>% 
     kable_styling(bootstrap_options = 
                          c("striped", "hover", "condensed", "responsive")) %>% 
@@ -60,7 +79,7 @@ knitr::kable(recordsfiltered) %>%
 # save `recordsfiltered` as a csv file to your working directory
 # write_csv(recordsfiltered, "recordsfiltered.csv")
 
-## ----echo = FALSE, results = 'asis'-------------------------------------------
+## ----eval=verify_records, echo = FALSE, results = 'asis'----------------------
 # List distinct values for the `preparation` field in recordsfiltered
 recordsfiltered %>% 
   group_by(`data.dwc:preparations`) %>% 
@@ -71,7 +90,7 @@ recordsfiltered %>%
                   full_width = FALSE) %>% 
   scroll_box(height = "400px")
 
-## -----------------------------------------------------------------------------
+## ----eval=verify_records------------------------------------------------------
 # Count how many records in the data were contributed by each recordset
 recordtally <- recordsfiltered %>% 
   group_by(recordset) %>% 
@@ -152,7 +171,7 @@ collections <- tibble(collection = attr(recordsfiltered, "attribution")) %>%
   
 
 
-## ----echo = FALSE, results = 'asis'-------------------------------------------
+## ----eval=verify_records, echo = FALSE, results = 'asis'----------------------
 knitr::kable(collections) %>% 
     kable_styling(bootstrap_options = 
                          c("striped", "hover", "condensed", "responsive")) %>% 
