@@ -599,27 +599,28 @@ collected in the United States.</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co"># to adjust your query and the fields (e.g. `uuid`) in `fields` to adjust the</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># columns returned in your results; edit the number after `limit` to adjust the</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># number of records you will retrieve images for</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>records <span class="ot">&lt;-</span> <span class="fu">idig_search_media</span>(<span class="at">rq =</span> <span class="fu">list</span>(<span class="at">genus =</span> <span class="st">&quot;acer&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>                                       <span class="at">country =</span> <span class="st">&quot;united states&quot;</span>), </span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>            <span class="at">fields =</span> <span class="fu">c</span>(<span class="st">&quot;uuid&quot;</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>                       <span class="st">&quot;accessuri&quot;</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>                       <span class="st">&quot;rights&quot;</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>                       <span class="st">&quot;format&quot;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>                       <span class="st">&quot;records&quot;</span>),</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>            <span class="at">limit =</span> <span class="dv">10</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>records<span class="sc">$</span>accessuri <span class="ot">&lt;-</span> <span class="fu">if_else</span>(<span class="fu">grepl</span>(<span class="st">&quot;^http://&quot;</span>, records<span class="sc">$</span>accessuri),</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;^http://&quot;</span>, <span class="st">&quot;&quot;</span>, records<span class="sc">$</span>accessuri),</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  records<span class="sc">$</span>accessuri</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>)</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>records<span class="sc">$</span>accessuri <span class="ot">&lt;-</span> <span class="fu">if_else</span>(<span class="fu">grepl</span>(<span class="st">&quot;https://mam.ansp.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;https://mam.ansp.org&quot;</span>, <span class="st">&quot;mam.ansp.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>  records<span class="sc">$</span>accessuri</span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>)</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>records<span class="sc">$</span>accessuri <span class="ot">&lt;-</span> <span class="fu">if_else</span>(<span class="fu">grepl</span>(<span class="st">&quot;https://ibss-images.calacademy.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;https://ibss-images.calacademy.org&quot;</span>, <span class="st">&quot;ibss-images.calacademy.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>  records<span class="sc">$</span>accessuri</span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>records <span class="ot">&lt;-</span> <span class="fu">idig_search_media</span>(<span class="at">rq =</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">genus =</span> <span class="st">&quot;acer&quot;</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>       <span class="at">country =</span> <span class="st">&quot;united states&quot;</span>), </span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>       <span class="at">fields =</span> <span class="fu">c</span>(<span class="st">&quot;uuid&quot;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>                  <span class="st">&quot;accessuri&quot;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>                  <span class="st">&quot;rights&quot;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>                  <span class="st">&quot;format&quot;</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>                  <span class="st">&quot;records&quot;</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>                <span class="at">limit =</span> <span class="dv">10</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>records<span class="sc">$</span>accessuri <span class="ot">&lt;-</span> <span class="fu">if_else</span>(<span class="fu">grepl</span>(<span class="st">&quot;^http://&quot;</span>, records<span class="sc">$</span>accessuri),</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;^http://&quot;</span>, <span class="st">&quot;&quot;</span>, records<span class="sc">$</span>accessuri),</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  records<span class="sc">$</span>accessuri</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>)</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>records<span class="sc">$</span>accessuri <span class="ot">&lt;-</span> <span class="fu">if_else</span>(<span class="fu">grepl</span>(<span class="st">&quot;https://mam.ansp.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;https://mam.ansp.org&quot;</span>, <span class="st">&quot;mam.ansp.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>  records<span class="sc">$</span>accessuri</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>)</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>records<span class="sc">$</span>accessuri <span class="ot">&lt;-</span> <span class="fu">if_else</span>(<span class="fu">grepl</span>(<span class="st">&quot;https://ibss-images.calacademy.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;https://ibss-images.calacademy.org&quot;</span>, <span class="st">&quot;ibss-images.calacademy.org&quot;</span>, records<span class="sc">$</span>accessuri),</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  records<span class="sc">$</span>accessuri</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>)</span></code></pre></div>
 <p>The result of the code above is a data frame called
 <code>records</code>:</p>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
@@ -868,34 +869,34 @@ go and download each media file. For clarity, we will place files in two
 different folders, based on whether we downloaded them from the iDigBio
 server or an external server. We will name each file based on its unique
 identifier.</p>
-<pre class="undefined"><code># Create new directories to save media files in
-dir.create(&quot;jpgs_idigbio&quot;)
-dir.create(&quot;jpgs_external&quot;)
-
-# Assemble another vector of file paths to use when saving media downloaded 
-# from iDigBio
-mediapath_idigbio &lt;- paste(&quot;jpgs_idigbio/&quot;, records$uuid, &quot;.jpg&quot;, sep = &quot;&quot;)
-
-# Assemble another vector of file paths to use when saving media downloaded
-# from external servers; please note that it&#39;s probably not a great idea to
-# assume these files are all jpgs, as we&#39;re doing here...
-mediapath_external &lt;- paste(&quot;jpgs_external/&quot;, records$uuid, &quot;.jpg&quot;, sep = &quot;&quot;)
-
-# Add a check to deal with URLs that are broken links
-possibly_download.file = purrr::possibly(download.file, 
-                                         otherwise = &quot;cannot download&quot;)
-
-#&quot;mode&quot; argument (=&quot;wb&quot;) in the walk function to download.file. 
-
-# Iterate through the action of downloading whatever file is at each
-# iDigBio URL
-purrr::walk2(.x = mediaurl_idigbio,
-             .y = mediapath_idigbio, possibly_download.file)
-
-# Iterate through the action of downloading whatever file is at each
-# external URL
-purrr::walk2(.x = mediaurl_external,
-             .y = mediapath_external, possibly_download.file)</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Create new directories to save media files in</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;jpgs_idigbio&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;jpgs_external&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Assemble another vector of file paths to use when saving media downloaded </span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># from iDigBio</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>mediapath_idigbio <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;jpgs_idigbio/&quot;</span>, records<span class="sc">$</span>uuid, <span class="st">&quot;.jpg&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co"># Assemble another vector of file paths to use when saving media downloaded</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co"># from external servers; please note that it&#39;s probably not a great idea to</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co"># assume these files are all jpgs, as we&#39;re doing here...</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>mediapath_external <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;jpgs_external/&quot;</span>, records<span class="sc">$</span>uuid, <span class="st">&quot;.jpg&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co"># Add a check to deal with URLs that are broken links</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>possibly_download.file <span class="ot">=</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(download.file, </span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>                                         <span class="at">otherwise =</span> <span class="st">&quot;cannot download&quot;</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&quot;mode&quot; argument (=&quot;wb&quot;) in the walk function to download.file. </span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co"># Iterate through the action of downloading whatever file is at each</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co"># iDigBio URL</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">walk2</span>(<span class="at">.x =</span> mediaurl_idigbio,</span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>             <span class="at">.y =</span> mediapath_idigbio, possibly_download.file)</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co"># Iterate through the action of downloading whatever file is at each</span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co"># external URL</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">walk2</span>(<span class="at">.x =</span> mediaurl_external,</span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>             <span class="at">.y =</span> mediapath_external, possibly_download.file)</span></code></pre></div>
 <p>You should now have two folders, each with ten images downloaded from
 iDigBio and external servers, respectively. Note that we only downloaded
 ten images here for brevity’s sake, but you can increase this using the

@@ -383,8 +383,8 @@ urceolata</i></a>.</p>
 following:</p>
 <table>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="22%" />
+<col width="77%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -468,7 +468,7 @@ field and could lack biological meaning</a></td>
 <h3>More ways to search</h3>
 <p>In addition to <code>scientificname</code>, record query may be based
 on many other fields. For example, you can search for all members of the
-<code>family</code><a href="https://en.wikipedia.org/wiki/Diapensiaceae">Diapensiaceae</a>:</p>
+<code>family</code> <a href="https://en.wikipedia.org/wiki/Diapensiaceae">Diapensiaceae</a>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>diapensiaceae_records <span class="ot">&lt;-</span> <span class="fu">idig_search_records</span>(<span class="at">rq=</span><span class="fu">list</span>(<span class="at">family=</span><span class="st">&quot;Diapensiaceae&quot;</span>), <span class="at">limit=</span><span class="dv">1000</span>)</span></code></pre></div>
 <p><strong>What if you want to read in all the points for a family
 within an extent?</strong></p>
@@ -506,8 +506,8 @@ urceolata</i></a>.</p>
 following:</p>
 <table>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="20%" />
+<col width="79%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -606,18 +606,14 @@ downloads with Media downloads</td>
 </table>
 <div id="more-ways-to-search-1" class="section level3">
 <h3>More ways to search</h3>
-<p>The media search above retained
-<code>{r eval=verify_galax_records} nrow(galax_media)</code> rows,
-however some of these observations do not have information in the
-<code>accessuri</code> field. To only obtain records with
-<code>acessuri</code>, we indicate we only want records where
-<code>data.ac:accessURI</code> exist, by setting <code>mq</code>, or
-media query, as followed:</p>
+<p>The media search above retained 341 rows, however some of these
+observations do not have information in the <code>accessuri</code>
+field. To only obtain records with <code>acessuri</code>, we indicate we
+only want records where <code>data.ac:accessURI</code> exist, by setting
+<code>mq</code>, or media query, as followed:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>galax_media2 <span class="ot">&lt;-</span> <span class="fu">idig_search_media</span>(<span class="at">rq=</span><span class="fu">list</span>(<span class="at">scientificname=</span><span class="st">&quot;Galax urceolata&quot;</span>),</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>                                  <span class="at">mq=</span><span class="fu">list</span>(<span class="st">&quot;data.ac:accessURI&quot;</span><span class="ot">=</span><span class="fu">list</span>(<span class="st">&quot;type&quot;</span><span class="ot">=</span><span class="st">&quot;exists&quot;</span>)))</span></code></pre></div>
-<p>Now we have
-<code>{r eval=verify_galax_records} nrow(galax_media2)</code>
-observations with <code>accessuri</code>!</p>
+<p>Now we have 327 observations with <code>accessuri</code>!</p>
 </div>
 </div>
 
